@@ -2,6 +2,11 @@
 FROM eclipse-temurin:21-jdk-alpine AS build
 WORKDIR /app
 COPY . .
+
+# Dá permissão de execução ao Maven Wrapper
+RUN chmod +x mvnw
+
+# Compila o projeto
 RUN ./mvnw clean package -DskipTests
 
 # Etapa 2: Executar a aplicação
