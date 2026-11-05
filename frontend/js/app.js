@@ -4,7 +4,7 @@
    CONFIGURAÇÃO
    ========================================================= */
 const CONFIG = {
-    API_BASE_URL: window.STREAW_API_URL || 'http://localhost:8080/api/filmes',
+    API_BASE_URL: window.STREAW_API_URL || 'https://streaw-ibke.onrender.com',
     IMG_BASE: 'https://image.tmdb.org/t/p',
     DEBOUNCE_MS: 350,
     CONSULTA_INICIAL: 'Interstellar',
