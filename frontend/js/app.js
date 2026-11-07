@@ -1,8 +1,6 @@
 'use strict';
 
-/* =========================================================
-   CONFIGURAÇÃO
-   ========================================================= */
+/*CONFIGURAÇÃO */
 const CONFIG = {
    API_BASE_URL: window.STREAW_API_URL || 'https://streaw-ibke.onrender.com/api/filmes',
     IMG_BASE: 'https://image.tmdb.org/t/p',
@@ -32,9 +30,7 @@ const GENERO_ID_POR_CONSULTA = {
 const TITULOS_ABAS = { home: 'Início', minhaLista: 'Minha Lista', dashboard: 'Dashboard' };
 const CORES_ROSCA = ['#0080ff', '#00e5ff', '#7000ff', '#ff007f', '#ffaa00', '#00ff88', '#ff4444', '#aaaaaa'];
 
-/* =========================================================
-   ESTADO
-   ========================================================= */
+/*ESTADO */
 const estado = {
     abaAtual: 'home',
     filmeSelecionado: null,
@@ -46,11 +42,8 @@ const estado = {
 };
 
 const $ = (id) => document.getElementById(id);
-const ehMobile = () => window.matchMedia('(max-width: 991.98px)').matches;
-
-/* =========================================================
-   UTILITÁRIOS
-   ========================================================= */
+const ehMobile = () => window
+/*UTILITÁRIOS */
 function criar(tag, props = {}, filhos = []) {
     const elemento = document.createElement(tag);
     Object.entries(props).forEach(([chave, valor]) => {
@@ -106,9 +99,7 @@ function urlImagem(caminho, tamanho) {
     return caminho.startsWith('http') ? caminho : `${CONFIG.IMG_BASE}/${tamanho}${caminho}`;
 }
 
-/* =========================================================
-   FEEDBACK: TOASTS, CARREGAMENTO E ERROS
-   ========================================================= */
+/*FEEDBACK: TOASTS, CARREGAMENTO E ERROS */
 function mostrarToast(mensagem, tipo = 'primary') {
     const container = $('toastContainer');
     const toast = criar('div', {
@@ -148,9 +139,7 @@ function mostrarErro(container, mensagem, aoTentarNovamente) {
     container.replaceChildren(criar('div', { class: 'col-12 text-center py-4', role: 'alert' }, filhos));
 }
 
-/* =========================================================
-   NAVEGAÇÃO
-   ========================================================= */
+/* NAVEGAÇÃO*/
 function mudarAba(nomeAba) {
     estado.abaAtual = nomeAba;
 
@@ -164,7 +153,6 @@ function mudarAba(nomeAba) {
 
     $('tituloSecao').textContent = TITULOS_ABAS[nomeAba];
 
-    // A busca só faz sentido no Início e na Minha Lista
     const input = $('inputBusca');
     $('buscaWrapper').classList.toggle('invisible', nomeAba === 'dashboard');
     input.value = '';
@@ -212,9 +200,7 @@ function abrirPainel() {
     $('btnTogglePainel').setAttribute('aria-label', 'Fechar painel de detalhes');
 }
 
-/* =========================================================
-   HOME E BUSCA
-   ========================================================= */
+/* HOME E BUSCA */
 async function carregarFilmesIniciais() {
     const container = $('resultadoBusca');
     mostrarCarregando(container);
@@ -287,9 +273,7 @@ function configurarBusca() {
     input.addEventListener('input', aoDigitar);
 }
 
-/* =========================================================
-   CARDS E PAINEL DE DETALHES
-   ========================================================= */
+/*CARDS E PAINEL DE DETALHES*/
 function exibirFilmes(filmes, container, naLista = false) {
     if (!filmes.length) {
         container.replaceChildren(criar('p', { class: 'text-secondary col-12', text: 'Nenhum filme encontrado.' }));
@@ -362,9 +346,7 @@ function atualizarPainelLateral(filme) {
     );
 }
 
-/* =========================================================
-   CRUD: MINHA LISTA (mesmos endpoints e payloads de antes)
-   ========================================================= */
+/*CRUD: MINHA LISTA */
 async function carregarIdsSalvos() {
     try {
         const dados = await buscarJson(CONFIG.API_BASE_URL);
@@ -436,9 +418,7 @@ async function removerDaLista(id) {
     }
 }
 
-/* =========================================================
-   DASHBOARD
-   ========================================================= */
+/*DASHBOARD*/
 function opcoesBase(extra = {}) {
     return {
         responsive: true,
@@ -557,9 +537,7 @@ function processarGraficoFaixasNotas(filmes) {
         'Quantidade de Filmes', '#7000ff');
 }
 
-/* =========================================================
-   INICIALIZAÇÃO
-   ========================================================= */
+/*INICIALIZAÇÃO */
 document.addEventListener('DOMContentLoaded', () => {
     configurarNavegacao();
     configurarBusca();
